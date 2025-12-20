@@ -71,67 +71,83 @@ const telemetry_form = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-md bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200">
+    <div className="flex flex-col w-full max-w-md justify-center bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200">
       <h2 className="text-center text-xl font-bold mb-4 text-gray-700 border-b pb-2">
         Telemetry Form
       </h2>
-      Voltage :{" "}
-      <input
-        type="number"
-        name="voltage"
-        value={formData.voltage}
-        onChange={handleChange}
-        placeholder="Enter Voltage"
-      ></input>
-      Current :{" "}
-      <input
-        type="number"
-        name="current"
-        value={formData.current}
-        onChange={handleChange}
-        placeholder="Enter Current"
-      ></input>
-      Temperature :{" "}
-      <input
-        type="number"
-        name="temperature"
+      <div className="flex items-center justify-between  mb-4">
+        <label className="font-bold  w-32">Voltage </label>
+        <input
+          type="number"
+          name="voltage"
+          value={formData.voltage}
+          onChange={handleChange}
+          placeholder="Enter Voltage"
+          className="border border-gray-300 rounded-md bg-white"
+        />
+      </div>
+      <div className="flex items-center justify-between  mb-4">
+        <label className="font-bold  w-32">Current </label>
+        <input
+          type="number"
+          name="current"
+         value={formData.current}
+         onChange={handleChange}
+         placeholder="Enter Current"
+         className="border border-gray-300 rounded-md bg-white"
+        />
+      </div>
+      <div className="flex items-center justify-between  mb-4">
+        <label className="font-bold  w-32">Temperature </label>
+        <input
+          type="number"
+           name="temperature"
         value={formData.temperature}
         onChange={handleChange}
         placeholder="Enter Temperature"
-      ></input>
-      SOC :{" "}
-      <input
-        type="number"
-        name="soc"
+         className="border border-gray-300 rounded-md bg-white"
+        />
+      </div>
+      <div className="flex items-center justify-between  mb-4">
+        <label className="font-bold  w-32">SOC </label>
+        <input
+          type="number"
+           name="soc"
         value={formData.soc}
         onChange={handleChange}
         placeholder="Enter SOC"
-      ></input>
-      <br></br>
-      <br></br>
-      <div className="flex flex-row justify-center gap-2">
+         className="border border-gray-300 rounded-md bg-white"
+        />
+      </div>
+
+
+
+      
+      
+      <div className="flex flex-row justify-center gap-2 mt-5">
         <button
           onClick={postData}
-          className="bg-blue-600  text-white font-bold py-2 px-4 rounded hover:bg-green-700"
+          className="bg-emerald-700  text-white font-bold py-2 px-4 rounded hover:bg-green-700"
         >
           POST Data
         </button>
-        <button onClick={getData} className="bg-blue-600  text-white font-bold py-2 px-4 rounded hover:bg-green-700">
+        <button onClick={getData} className="bg-emerald-700  text-white font-bold py-2 px-4 rounded hover:bg-green-700">
           GET Data
         </button>
       </div>
-      <div className="flex flex-col w-full max-w-md bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200">
+      <div className="flex flex-col w-full max-w-md mt-5 bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200">
       <h2 className="text-center text-xl font-bold mb-4 text-gray-700 border-b pb-2">
-        Current Battery Parameters 
+        Battery's Latest Parameters 
       </h2>
       <div className="flex flex-col justify-center gap-3.5">
         <div className="flex flex-row justify-left gap-10" > 
-          <span>Voltage :{latestData.voltage}</span>
-          <span>Current :{latestData.current}</span>
+           <label className="font-bold  w-32">Voltage - </label><span>{latestData.voltage}</span>
+           <label className="font-bold  w-32">Current - </label><span>{latestData.current}</span>
+         
         </div>
         <div className="flex flex-row justify-left gap-10">
-          <span>Temperature :{latestData.temperature}</span>
-          <span>SOC :{latestData.soc}</span>
+           <label className="font-bold  w-32">Temperature- </label><span>{latestData.temperature}</span>
+           <label className="font-bold  w-32">SOC- </label><span>{latestData.soc}</span>
         </div>
       </div>
       </div>
