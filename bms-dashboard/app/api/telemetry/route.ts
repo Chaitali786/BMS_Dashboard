@@ -1,7 +1,7 @@
 import {NextResponse} from 'next/server';
 
 export async function GET(){
-  const URL = process.env.REBABA_API_URL;
+  const URL = process.env.API_URL;
 
   if (!URL) {
     return NextResponse.json(
@@ -15,7 +15,7 @@ export async function GET(){
 }
 
 export async function POST(request : Request){
-  const URL = process.env.REBABA_API_URL;
+  const URL = process.env.API_URL;
 
 if (!URL) {
     return NextResponse.json(
