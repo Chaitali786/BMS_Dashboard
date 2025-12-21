@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Battery Telemetry Dashboard
+This project allows users to submit battery telemetry data (Voltage, Current, Temperature, SOC) and view the latest readings in a dashboard.
 
-## Getting Started
+Getting Started
+To get this project running on your local machine, follow these steps:
 
-First, run the development server:
+1. Prerequisites
+Node.js (v18 or higher recommended)
 
-```bash
+npm or yarn
+
+2. Installation
+First, clone the repository and install the dependencies:
+npm install
+
+3. Environment Setup
+The API URL  is kept private for security. 
+You need to create a local environment file:
+
+  1. Create a file named .env.local in the root folder.
+
+  2. Add the following variable (replace with your actual API details):
+      API_URL=add_URL_here
+      Note: This file is already ignored by Git to keep credentials safe.
+
+4. Run the Development Server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Tech Stack & Implementation
+Framework: Next.js 15 
+Styling: Tailwind CSS
+Data Handling: React Server Actions and the FormData API
+Responsiveness: Designed with a mobile-first approach.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Key Features
+Forms: Uses FormData for efficient data submission.
 
-## Learn More
+Real-time Validation: HTML5 validation ensures only positive numbers are submitted for battery data.
 
-To learn more about Next.js, take a look at the following resources:
+Dashboard: A clean, row-based table layout for quick telemetry analysis.Dashboard shows latest fetched telemetry data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Safety Alerts: Visual message that trigger when the battery voltage exceeds safety threshold(200v-240v).
