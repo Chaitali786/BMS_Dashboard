@@ -12,6 +12,7 @@ const telemetry_form = () => {
 
   const [isDataSaved, showPostDataMsg] = useState(false);
   const [isDataFetched, showFetchingMsg] = useState(false);
+  const [isDashboardVisible, setIsDashboardVisible] = useState(false);
 
   const postData = async (formData: FormData) => {
     const telemetryFormData = Object.fromEntries(formData);
@@ -62,6 +63,7 @@ const telemetry_form = () => {
           temperature: result.temperature,
           soc: result.soc,
         });
+        setIsDashboardVisible(true)
       }
     } catch (error) {
       console.error("Error fetching latest data", error);
@@ -72,9 +74,10 @@ const telemetry_form = () => {
 
   const getVoltageStatus = (voltageCurrentValue: any) => {
     const voltageLatest = Number(voltageCurrentValue);
-    return voltageLatest >= 240 || voltageLatest >= 200 ? "red" : "black";
+    if (voltageLatest < 200) return "low";
+    if (voltageLatest > 240) return "high";
   };
-  
+
   return (
     <form
       action={postData}
@@ -143,15 +146,16 @@ const telemetry_form = () => {
         </button>
       </div>
       {isDataSaved && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-2 py-1 rounded text-[10px] font-bold mt-2">
+        <div className="bg-green-100 border border-green-400 text-green-700 px-2 py-1 rounded text-[10px] font-bold mt-2 ">
           Battery Data Saved Sucessfully !
         </div>
       )}
       {isDataFetched && (
-        <div className="w-4 h-4 border-2 border-gray border-t-transparent  rounded-full animate-spin"></div>
+        <div className="w-4 h-4 border-2 border-gray border-t-transparent rounded-full animate-spin"></div>
       )}
-      {isDataFetched ? "Fetching Data ......" : "Latest Data"}
-      <div className="w-full max-w-md mt-5 bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200">
+      {isDataFetched ? "Fetching Data ......" : ""}
+      {isDashboardVisible &&
+        <div className="w-full max-w-md mt-5 bg-gray-100 p-6 rounded-lg shadow-md border border-gray-200 ">
         <h2 className="text-center text-xl font-bold mb-4 text-gray-700 border-b pb-2">
           Battery Dashboard
         </h2>
@@ -163,11 +167,7 @@ const telemetry_form = () => {
                 Voltage
               </td>
               <td
-                className={`px-2 border-r border-gray-300 ${
-                  getVoltageStatus(latestData.voltage) === "red"
-                    ? "text-red-600 font-bold"
-                    : "text-black"
-                }`}
+                className={"px-2 border-r border-gray-300" }
               >
                 {latestData.voltage}v
               </td>
@@ -192,12 +192,20 @@ const telemetry_form = () => {
           </tbody>
         </table>
 
-        {getVoltageStatus(latestData.voltage) === "red" && (
+        {getVoltageStatus(latestData.voltage) === "low" && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-2 py-1 rounded text-[10px] font-bold mt-2">
-            High Voltage Detected! Please investigate the deviation!
+            LOW Voltage Detected!
+          </div>
+        )}
+        {getVoltageStatus(latestData.voltage) === "high" && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-2 py-1 rounded text-[10px] font-bold mt-2">
+            HIGH Voltage Detected!
           </div>
         )}
       </div>
+
+      }
+      
     </form>
   );
 };
