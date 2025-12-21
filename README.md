@@ -20,7 +20,7 @@ The API URL  is kept private for security.
 
 You need to create a local environment file:
 
-  1. Create a file named .env.local in the root folder.
+  1. Create a file named .env in the root folder.
 
   2. Add the following variable (replace with your actual API details):
      
@@ -31,7 +31,8 @@ You need to create a local environment file:
 5. Run the Development Server
 npm run dev
 
-Open http://localhost:3000 in your browser to see the result.
+Open http://127.0.0.1:3000 in your browser to see the result.
+**Important for Node.js v20+ users:** If your API is running locally, use `http://127.0.0.1` instead of `http://localhost` in your `API_URL` to prevent connection timeout errors.
 
 Tech Stack & Implementation
 Framework: Next.js 15 
