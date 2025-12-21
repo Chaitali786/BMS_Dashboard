@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const URL = process.env.API_URL;
-
+  const URL = process.env.API_URL?.trim();
+  
   if (!URL) {
     return NextResponse.json(
       { error: "Internal Server Error: API URL is missing" },
